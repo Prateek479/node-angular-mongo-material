@@ -1,0 +1,30 @@
+/*.user.splash-screen .splash-main-container .splash-main {
+  margin: 5% auto; }
+  .user.splash-screen .splash-main-container .splash-main button[type="submit"].btn.btn-primary {
+    color: black;
+    font-weight: bold;
+    padding: 15px 30px;
+    display: inline-block;
+    border: none; }
+  .user.splash-screen .splash-main-container .splash-main .signup .form-group .show-login {
+    color: black;
+    font-weight: bold;
+    padding: 15px 30px;
+    display: inline-block;
+    border: none;
+    /* background: #ffa323; */
+  /*  background: linear-gradient(to bottom, black 40%, black 54%, black 100%);
+    border-radius: 20px; }
+  .user.splash-screen .splash-main-container .splash-main .signin .form-group .show-signup {
+    color: #000;
+    font-weight: bold;
+    padding: 15px 30px;
+    display: inline-block;
+    border: none;
+    /* background: #ffa323; */
+   /* background: linear-gradient(to bottom, black 40%, black 54%, black 100%);
+    border-radius: 20px; }
+  .user.splash-screen .splash-main-container .splash-main a {
+    color: black; }
+*/
+
