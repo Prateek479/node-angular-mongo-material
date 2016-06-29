@@ -54,7 +54,6 @@ exports.signin = function() {};
 /**
  * Auth callback
  */
-console.log('here', login)
 exports.authCallback = login;
 
 /**
@@ -84,7 +83,7 @@ exports.signup = function(req, res) {
 
 exports.logout = function(req, res) {
   req.logout();
-  res.redirect('/login');
+  res.redirect('/#/login');
 };
 
 /**

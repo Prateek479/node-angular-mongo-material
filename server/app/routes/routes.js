@@ -7,10 +7,10 @@
 // Note: We can require users, articles and other cotrollers because we have
 // set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
 
-const users = require('../server/app/controllers/users');
-const articles = require('../server/app/controllers/articles');
-const comments = require('../server/app/controllers/comments');
-const tags = require('../server/app/controllers/tags');
+const users = require('../controllers/users');
+const articles = require('../controllers/articles');
+const comments = require('../controllers/comments');
+const tags = require('../controllers/tags');
 const auth = require('./middlewares/authorization');
 
 /**
@@ -28,6 +28,11 @@ module.exports = function(app, passport) {
 
   // user routes
   app.get('/login', users.login);
+  app.get('/api/abc', function(req, res) {
+    res.json({
+      'lol': 'lol'
+    })
+  })
   app.get('/signup', users.signup);
   app.get('/logout', users.logout);
   app.post('/users', users.create);
@@ -89,6 +94,16 @@ module.exports = function(app, passport) {
     }), users.authCallback);
 
   app.param('userId', users.load);
+
+  // AngularJS route to check for authentication
+  app.get('/api/loggedin', function(req, res) {
+    console.log('fuck yeah', req.user)
+    // if (!req.isAuthenticated()) return res.send('0');
+    // auth.findUser(req.user._id, function(user) {
+    // res.send(user ? user : '0');
+    // });
+    res.send('0');
+  });
 
   // article routes
   app.param('id', articles.load);

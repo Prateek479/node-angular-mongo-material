@@ -5,8 +5,9 @@
  */
 
 const mongoose = require('mongoose');
+const join = require('path').join;
 const GithubStrategy = require('passport-github').Strategy;
-const config = require('../config');
+const config = require(join('/Users/prateek/webapps/aim/intranetLive/', '/config/config'));
 const User = mongoose.model('User');
 
 /**
@@ -18,11 +19,13 @@ module.exports = new GithubStrategy({
     clientSecret: config.github.clientSecret,
     callbackURL: config.github.callbackURL
   },
-  function (accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, done) {
     const options = {
-      criteria: { 'github.id': profile.id }
+      criteria: {
+        'github.id': profile.id
+      }
     };
-    User.load(options, function (err, user) {
+    User.load(options, function(err, user) {
       if (err) return done(err);
       if (!user) {
         user = new User({
@@ -32,7 +35,7 @@ module.exports = new GithubStrategy({
           provider: 'github',
           github: profile._json
         });
-        user.save(function (err) {
+        user.save(function(err) {
           if (err) console.log(err);
           return done(err, user);
         });

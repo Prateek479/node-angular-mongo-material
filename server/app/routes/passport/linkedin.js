@@ -5,8 +5,9 @@
  */
 
 const mongoose = require('mongoose');
+const join = require('path').join;
 const LinkedinStrategy = require('passport-linkedin').Strategy;
-const config = require('../config');
+const config = require(join('/Users/prateek/webapps/aim/intranetLive/', '/config/config'));
 const User = mongoose.model('User');
 
 /**

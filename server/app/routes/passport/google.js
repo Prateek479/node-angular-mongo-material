@@ -5,24 +5,28 @@
  */
 
 const mongoose = require('mongoose');
+const join = require('path').join;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const config = require('../config');
+const config = require(join('/Users/prateek/webapps/aim/intranetLive/', '/config/config'));
 const User = mongoose.model('User');
 
+console.log('here', __dirname);
 /**
  * Expose
- */
+//  */
 
 module.exports = new GoogleStrategy({
     clientID: config.google.clientID,
     clientSecret: config.google.clientSecret,
     callbackURL: config.google.callbackURL
   },
-  function (accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, done) {
     const options = {
-      criteria: { 'google.id': profile.id }
+      criteria: {
+        'google.id': profile.id
+      }
     };
-    User.load(options, function (err, user) {
+    User.load(options, function(err, user) {
       if (err) return done(err);
       if (!user) {
         user = new User({
@@ -32,7 +36,7 @@ module.exports = new GoogleStrategy({
           provider: 'google',
           google: profile._json
         });
-        user.save(function (err) {
+        user.save(function(err) {
           if (err) console.log(err);
           return done(err, user);
         });

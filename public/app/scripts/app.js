@@ -8,33 +8,25 @@
  *
  * Main module of the application.
  */
-angular
-  .module('intranetMaterialApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .when('/login', {
-        templateUrl: 'views/users/login.html',
-        controller: 'LoginCtrl',
-        controllerAs: 'login'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+angular.module('intranetMaterialApp', [
+  'ngAnimate',
+  'ngCookies',
+  'ngResource',
+  'ui.router',
+  'ngSanitize',
+  'ngTouch'
+]).config(['$stateProvider', '$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider.state('Main', {
+      url: "/",
+      templateUrl: 'views/main.html'
+    }).state('About', {
+      url: "/about",
+      templateUrl: 'views/about.html'
+    }).state('Login', {
+      url: "/login",
+      templateUrl: 'views/users/login.html'
+    });
+  }
+]);
