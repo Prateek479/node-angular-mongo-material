@@ -12,6 +12,8 @@ const articles = require('../controllers/articles');
 const comments = require('../controllers/comments');
 const tags = require('../controllers/tags');
 const auth = require('./middlewares/authorization');
+const system = require('../controllers/system');
+const permissions = require('../controllers/permission')
 
 /**
  * Route middlewares
@@ -28,19 +30,13 @@ module.exports = function(app, passport) {
 
   // user routes
   app.get('/login', users.login);
-  app.get('/api/abc', function(req, res) {
-    res.json({
-      'lol': 'lol'
-    })
-  })
+
   app.get('/signup', users.signup);
   app.get('/logout', users.logout);
   app.post('/users', users.create);
-  app.post('/users/session',
-    passport.authenticate('local', {
-      failureRedirect: '/login',
-      failureFlash: 'Invalid email or password.'
-    }), users.session);
+  app.post('/users/session', passport.authenticate('local'), function(req, res) {
+    res.send('/')
+  });
   app.get('/users/:userId', users.show);
 
   app.get('/auth/facebook',
@@ -96,13 +92,11 @@ module.exports = function(app, passport) {
   app.param('userId', users.load);
 
   // AngularJS route to check for authentication
-  app.get('/api/loggedin', function(req, res) {
-    console.log('fuck yeah', req.user)
-    // if (!req.isAuthenticated()) return res.send('0');
-    // auth.findUser(req.user._id, function(user) {
-    // res.send(user ? user : '0');
-    // });
-    res.send('0');
+  app.get('/api/loggedin', function(req, res, next) {
+    if (!req.isAuthenticated()) return res.send('0');
+    users.find(req.user._id, function(user) {
+      res.send(user ? user : 0);
+    });
   });
 
   // article routes
@@ -116,11 +110,18 @@ module.exports = function(app, passport) {
   app.delete('/articles/:id', articleAuth, articles.destroy);
 
   // home route
-  app.get('/', function(req, res) {
-    res.render('index', {
-      title: 'Intranet - get social with profession '
-    });
-  });
+  app.get('/', function(req, res, next) {
+    if (req.isAuthenticated()) {
+      next();
+      // res.render('index', {
+      //   title: 'Intranet - get social with profession '
+      // });
+    } else {
+      res.render('splash', {
+        title: 'Intranet - get social with profession '
+      });
+    }
+  }, system.render);
   // articles.index
   // comment routes
   app.param('commentId', comments.load);
@@ -131,6 +132,18 @@ module.exports = function(app, passport) {
   // tag routes
   app.get('/tags/:tag', tags.index);
 
+
+  // Permission routes
+  // Admin Permission and roles
+  app.get('/admin/permission', auth.requiresLogin, permissions.getPermission);
+  app.get('/admin/role', auth.requiresLogin, permissions.getRoleList);
+  app.put('/config/updateusers', permissions.updateUserInfo);
+  app.get('/allusers', permissions.listusers);
+  app.get('/users', permissions.mentionUsers);
+  app.put('/config/updatepermission', permissions.updatePermissions);
+  app.route('/user/:userId')
+    .put(auth.requiresLogin, permissions.updatedetail)
+    .delete(auth.requiresLogin, permissions.destroy);
 
   /**
    * Error handling

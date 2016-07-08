@@ -1,55 +1,83 @@
-<div class="jumbotron" data-ng-controller="LoginCtrl">    	
+<div class="jumbotron" data-ng-controller="LoginCtrl">
   <div class="alert alert-danger animated fadeIn" ng-show="loginerror">{{loginerror}}</div>
-  <div class="col-md-12">
-  	<div class="col-md-6">
-  	  <h4>Sign in</h4>	
-    </div>
-    <div class="col-md-6">
-  	  <h4>Sign up</h4>	
-    </div>
+  <div class="col-md-12" ng-if="type === 'signin'">
+    <form ng-submit="login()" class="signin form-horizontal">
+      <div class="form-group">
+        <label for="email" class="col-md-4 control-label">Email</label>
+        <div class="col-md-8">
+          <input required id="email" type="email" name="email" placeholder="Email" class="form-control" ng-model="user.email" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="col-md-4 control-label">Password</label>
+        <div class="col-md-8">
+          <input required id="password" type="password" name="password" placeholder="Password" class="form-control" ng-model="user.password" />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+          <a ui-sref='auth.forgot-password'>Forgot your password?</a>
+        </div>
+      </div>
+    </form>
   </div>
-  <div class="col-md-12">
-	  <form  ng-submit="login()" class="signin form-horizontal">
-	    <div class="form-group">
-	      <label for="email" class="col-md-4 control-label">Email</label>
-	      <div class="col-md-8">
-	        <input required id="email" type="email" name="email" placeholder="Email" class="form-control" ng-model="user.email"/>
-	      </div>
-	    </div>
-	    <div class="form-group">
-	      <label for="password" class="col-md-4 control-label">Password</label>
-	      <div class="col-md-8">
-	        <input required id="password" type="password" name="password" placeholder="Password" class="form-control" ng-model="user.password"/>
-	      </div>
-	    </div>
-	    <div class="form-group">
-	      <div class="col-md-offset-4 col-md-8">
-	        <button type="submit" class="btn btn-primary">Sign in</button>
-	      </div>
-	    </div>
-	    <div class="form-group">
-	      <div class="col-md-offset-4 col-md-8">
-	        <a ui-sref='auth.forgot-password'>Forgot your password?</a>
-	      </div>
-	    </div>
-	  </form>
+  <div class="col-md-12" ng-if="type === 'signup'">
+    <form action="/users" method="post" role="form" class="form-horizontal">
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Full name</label>
+        <div class="col-sm-10">
+          <input id="name" class="form-control" type="text" name="name" placeholder="Full name" value="{{ user.name }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+          <input type="text" name="email" placeholder="Email" value="{{ user.email }}" id="email" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Username</label>
+        <div class="col-sm-10">
+          <input id="username" class="form-control" type="text" name="username" placeholder="Username" value="{{ user.username }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+          <input id="password" class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class="btn btn-primary" type="submit">Sign up</button>
+          &nbsp; or &nbsp;
+          <a href="/login" class="show-login">Log in</a>
+        </div>
+      </div>
+    </form>
   </div>
   or
   <div class="col-md-12">
-	  <a href="http://localhost:3000/auth/facebook">
-	    <img src="/images/facebook.png" alt="facebook auth">
-	  </a>
-	  <a href="http://localhost:3000/auth/github">
-	    <img src="/images/github.png" alt="github auth">
-	  </a>
-	  <a href="http://localhost:3000/auth/twitter">
-	    <img src="/images/twitter.png" alt="twitter auth">
-	  </a>
-	  <a href="http://localhost:3000/auth/google">
-	    <img src="/images/google.png" alt="google auth">
-	  </a>
-	  <a href="http://localhost:3000/auth/linkedin">
-	    <img src="/images/linkedin.png" alt="linkedin auth">
-	  </a>  
+    <a href="/auth/facebook">
+      <img style="width: 19%;" src="/images/facebook.png" alt="facebook auth">
+    </a>
+    <a href="/auth/github">
+      <img style="width: 19%;" src="/images/github.png" alt="github auth">
+    </a>
+    <a href="/auth/twitter">
+      <img style="width: 19%;" src="/images/twitter.png" alt="twitter auth">
+    </a>
+    <a href="/auth/google">
+      <img style="width: 19%;" src="/images/google.png" alt="google auth">
+    </a>
+    <a href="/auth/linkedin">
+      <img style="width: 19%;" src="/images/linkedin.png" alt="linkedin auth">
+    </a>
   </div>
 </div>

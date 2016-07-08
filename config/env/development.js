@@ -24,7 +24,7 @@ if (fs.existsSync(envFile)) {
  */
 
 module.exports = {
-  db: 'mongodb://localhost/noobjs_dev',
+  db: 'mongodb://localhost/dev-intranet',
   facebook: {
     clientID: 488623138014505,
     clientSecret: '07aed49ebe29c09df4db94a1fd205c4b',

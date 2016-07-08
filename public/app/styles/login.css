@@ -1,30 +1,156 @@
-/*.user.splash-screen .splash-main-container .splash-main {
-  margin: 5% auto; }
-  .user.splash-screen .splash-main-container .splash-main button[type="submit"].btn.btn-primary {
-    color: black;
-    font-weight: bold;
-    padding: 15px 30px;
-    display: inline-block;
-    border: none; }
-  .user.splash-screen .splash-main-container .splash-main .signup .form-group .show-login {
-    color: black;
-    font-weight: bold;
-    padding: 15px 30px;
-    display: inline-block;
-    border: none;
-    /* background: #ffa323; */
-  /*  background: linear-gradient(to bottom, black 40%, black 54%, black 100%);
-    border-radius: 20px; }
-  .user.splash-screen .splash-main-container .splash-main .signin .form-group .show-signup {
-    color: #000;
-    font-weight: bold;
-    padding: 15px 30px;
-    display: inline-block;
-    border: none;
-    /* background: #ffa323; */
-   /* background: linear-gradient(to bottom, black 40%, black 54%, black 100%);
-    border-radius: 20px; }
-  .user.splash-screen .splash-main-container .splash-main a {
-    color: black; }
-*/
+.splash-screen {
+  background: url("/images/bg.jpg") no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
+.splash-screen .splash-main-container {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100% !important;
+}
+
+.splash-screen .splash-main-container .splash-main {
+  width: 40%;
+  margin: 15% auto;
+  min-height: 250px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  background: #000;
+  background: rgba(221, 221, 221, 0.7);
+  padding: 40px;
+}
+
+.splash-screen .splash-main-container .logo {
+  text-align: center;
+  width: 35px;
+  height: 100%;
+  float: left;
+  margin-right: 30px;
+}
+
+.splash-screen .splash-main-container .logo img {
+  width: 100%;
+  height: auto;
+}
+
+.splash-screen .splash-main-container .slogan {
+  font-size: 32px;
+  line-height: 1.3;
+  max-width: 500px;
+  margin-left: 65px;
+  letter-spacing: -0.02em;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.splash-screen .splash-main-container .splash-links a {
+  color: #000;
+  font-weight: bold;
+  padding: 15px 30px;
+  display: inline-block;
+  margin-top: 30px;
+  background: #ffa323;
+  background: -moz-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(40%, #ffa323), color-stop(54%, #f68922), color-stop(100%, #f68922));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* Opera 11.10+ */
+  background: linear-gradient(to bottom, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffa323', endColorstr='#f68922');
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 2px 1px #d75627;
+  -moz-box-shadow: 0 2px 1px #d75627;
+  box-shadow: 0 2px 1px #d75627;
+}
+
+.splash-screen footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 0 8px 6px 6px black;
+  -moz-box-shadow: 0 8px 6px 6px black;
+  box-shadow: 0 8px 6px 6px black;
+}
+
+.splash-screen footer .copy {
+  color: #000;
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+}
+
+@media only screen {
+  .splash-screen footer .copy {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: lower-bound(40.063em, 64em)) {
+  .splash-screen footer .copy {
+    font-size: 14px;
+  }
+}
+
+.user.splash-screen .splash-main-container .splash-main {
+  margin: 5% auto;
+}
+
+.user.splash-screen .splash-main-container .splash-main button[type="submit"].btn.btn-primary {
+  color: #000;
+  font-weight: bold;
+  padding: 15px 30px;
+  display: inline-block;
+  border: none;
+  background: #ffa323;
+  background: -moz-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(40%, #ffa323), color-stop(54%, #f68922), color-stop(100%, #f68922));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* Opera 11.10+ */
+  background: linear-gradient(to bottom, #ffa323 40%, #f68922 54%, #f68922 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffa323', endColorstr='#f68922');
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 2px 1px #d75627;
+  -moz-box-shadow: 0 2px 1px #d75627;
+  box-shadow: 0 2px 1px #d75627;
+}
+
+.user.splash-screen .splash-main-container .splash-main a {
+  color: #f68922;
+}
+
+</style>

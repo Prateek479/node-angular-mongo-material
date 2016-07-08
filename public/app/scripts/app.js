@@ -14,19 +14,58 @@ angular.module('intranetMaterialApp', [
   'ngResource',
   'ui.router',
   'ngSanitize',
-  'ngTouch'
+  'ngTouch',
+  'ui.bootstrap',
+  'ui.select2'
 ]).config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider.state('Main', {
       url: "/",
-      templateUrl: 'views/main.html'
+      views: {
+        '': {
+          templateUrl: 'views/main.html',
+        },
+        'anonymous': {
+          templateUrl: 'views/about.html',
+        }
+      }
+    }).state('manage permission', {
+      url: '/manage/users/permissions',
+      templateUrl: 'views/admin/manage-permission.html',
+      resolve: {
+        loggedIn: function(userUtility) {
+          return userUtility.checkLoggedin();
+        }
+      }
+    }).state('manage users', {
+      url: '/manage/users',
+      templateUrl: 'views/admin/manage-users.html',
+      resolve: {
+        loggedIn: function(userUtility) {
+          return userUtility.checkLoggedin();
+        }
+      }
     }).state('About', {
       url: "/about",
-      templateUrl: 'views/about.html'
+      templateUrl: 'views/about.html',
+      resolve: {
+        loggedIn: function(userUtility) {
+          return userUtility.checkLoggedin();
+        }
+      }
     }).state('Login', {
       url: "/login",
-      templateUrl: 'views/users/login.html'
+      views: {
+        'anonymous': {
+          templateUrl: 'views/users/login.html',
+          resolve: {
+            loggedOut: function(userUtility) {
+              return userUtility.checkLoggedOut();
+            }
+          }
+        }
+      }
     });
   }
 ]);

@@ -21,13 +21,38 @@ const oAuthTypes = [
  */
 
 const UserSchema = new Schema({
-  name: { type: String, default: '' },
-  email: { type: String, default: '' },
-  username: { type: String, default: '' },
-  provider: { type: String, default: '' },
-  hashed_password: { type: String, default: '' },
-  salt: { type: String, default: '' },
-  authToken: { type: String, default: '' },
+  name: {
+    type: String,
+    default: ''
+  },
+  email: {
+    type: String,
+    default: ''
+  },
+  roles: [{
+    type: String,
+    default: ['authenticated']
+  }],
+  username: {
+    type: String,
+    default: ''
+  },
+  provider: {
+    type: String,
+    default: ''
+  },
+  hashed_password: {
+    type: String,
+    default: ''
+  },
+  salt: {
+    type: String,
+    default: ''
+  },
+  authToken: {
+    type: String,
+    default: ''
+  },
   facebook: {},
   twitter: {},
   github: {},
@@ -43,12 +68,12 @@ const validatePresenceOf = value => value && value.length;
 
 UserSchema
   .virtual('password')
-  .set(function (password) {
+  .set(function(password) {
     this._password = password;
     this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
   })
-  .get(function () {
+  .get(function() {
     return this._password;
   });
 
@@ -58,34 +83,36 @@ UserSchema
 
 // the below 5 validations only apply if you are signing up traditionally
 
-UserSchema.path('name').validate(function (name) {
+UserSchema.path('name').validate(function(name) {
   if (this.skipValidation()) return true;
   return name.length;
 }, 'Name cannot be blank');
 
-UserSchema.path('email').validate(function (email) {
+UserSchema.path('email').validate(function(email) {
   if (this.skipValidation()) return true;
   return email.length;
 }, 'Email cannot be blank');
 
-UserSchema.path('email').validate(function (email, fn) {
+UserSchema.path('email').validate(function(email, fn) {
   const User = mongoose.model('User');
   if (this.skipValidation()) fn(true);
 
   // Check only when it is a new user or when email field is modified
   if (this.isNew || this.isModified('email')) {
-    User.find({ email: email }).exec(function (err, users) {
+    User.find({
+      email: email
+    }).exec(function(err, users) {
       fn(!err && users.length === 0);
     });
   } else fn(true);
 }, 'Email already exists');
 
-UserSchema.path('username').validate(function (username) {
+UserSchema.path('username').validate(function(username) {
   if (this.skipValidation()) return true;
   return username.length;
 }, 'Username cannot be blank');
 
-UserSchema.path('hashed_password').validate(function (hashed_password) {
+UserSchema.path('hashed_password').validate(function(hashed_password) {
   if (this.skipValidation()) return true;
   return hashed_password.length && this._password.length;
 }, 'Password cannot be blank');
@@ -95,7 +122,7 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
  * Pre-save hook
  */
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', function(next) {
   if (!this.isNew) return next();
 
   if (!validatePresenceOf(this.password) && !this.skipValidation()) {
@@ -119,7 +146,7 @@ UserSchema.methods = {
    * @api public
    */
 
-  authenticate: function (plainText) {
+  authenticate: function(plainText) {
     return this.encryptPassword(plainText) === this.hashed_password;
   },
 
@@ -130,7 +157,7 @@ UserSchema.methods = {
    * @api public
    */
 
-  makeSalt: function () {
+  makeSalt: function() {
     return Math.round((new Date().valueOf() * Math.random())) + '';
   },
 
@@ -142,7 +169,7 @@ UserSchema.methods = {
    * @api public
    */
 
-  encryptPassword: function (password) {
+  encryptPassword: function(password) {
     if (!password) return '';
     try {
       return crypto
@@ -158,8 +185,8 @@ UserSchema.methods = {
    * Validation is not required if using OAuth
    */
 
-  skipValidation: function () {
-    return ~oAuthTypes.indexOf(this.provider);
+  skipValidation: function() {
+    return~ oAuthTypes.indexOf(this.provider);
   }
 };
 
@@ -177,8 +204,8 @@ UserSchema.statics = {
    * @api private
    */
 
-  load: function (options, cb) {
-    options.select = options.select || 'name username';
+  load: function(options, cb) {
+    options.select = options.select || 'name username roles';
     return this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);

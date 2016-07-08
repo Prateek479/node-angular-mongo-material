@@ -1,17 +1,20 @@
 'use strict';
 
 
-angular.module('intranetMaterialApp').factory('userUtility', ['$rootScope', '$http', '$stateParams',
-  function($rootScope, $http, $stateParams) {
+angular.module('intranetMaterialApp').factory('userUtility', ['$rootScope', '$http', '$timeout', '$q', '$cookies', '$location', '$stateParams',
+  function($rootScope, $http, $timeout, $q, $cookies, $location, $stateParams) {
 
     function MeanUserKlass() {}
 
     var MeanUser = new MeanUserKlass();
 
     MeanUserKlass.prototype.checkLoggedin = function() {
+
       var deferred = $q.defer();
+
       // Make an AJAX call to check if the user is logged in
       $http.get('/api/loggedin').success(function(user) {
+
         // Authenticated
         if (user !== '0') $timeout(deferred.resolve);
 
@@ -19,7 +22,7 @@ angular.module('intranetMaterialApp').factory('userUtility', ['$rootScope', '$ht
         else {
           $cookies.put('redirect', $location.path());
           $timeout(deferred.reject);
-          $location.url('/auth/login');
+          $location.url('login');
         }
       });
 

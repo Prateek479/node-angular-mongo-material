@@ -31,11 +31,25 @@ exports.create = wrap(function * (req, res) {
   const user = new User(req.body);
   user.provider = 'local';
   yield user.save();
+
   req.logIn(user, err => {
     if (err) req.flash('info', 'Sorry! We are not able to log you in!');
     return res.redirect('/');
   });
 });
+/**
+ * Find A profile
+ **/
+
+exports.find = function(id, callback) {
+  console.log('hereId', id);
+  console.log('hereCallback', callback);
+  User.findOne({
+    _id: id
+  }).exec(function(err, user) {
+    callback(user);
+  })
+};
 
 /**
  *  Show profile
@@ -97,7 +111,6 @@ exports.session = login;
  */
 
 function login(req, res) {
-  console.log('return to ', req.session.returnTo)
   const redirectTo = req.session.returnTo ? req.session.returnTo : '/';
   delete req.session.returnTo;
   res.redirect(redirectTo);
