@@ -7,7 +7,7 @@
 const mongoose = require('mongoose');
 const join = require('path').join;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const config = require(join('/Users/prateek/webapps/aim/intranetLive/', '/config/config'));
+const config = require('../../../../config/config');
 const User = mongoose.model('User');
 
 console.log('here', __dirname);
