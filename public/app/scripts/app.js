@@ -14,11 +14,12 @@ angular.module('intranetMaterialApp', [
   'ngResource',
   'ui.router',
   'ngSanitize',
-  'ngTouch',
-  'ui.bootstrap',
-  'ui.select2'
-]).config(['$stateProvider', '$urlRouterProvider',
-  function($stateProvider, $urlRouterProvider) {
+  'ui.select2',
+  'ngMaterial'
+]).config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider',
+  function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+    // $mdThemingProvider.theme('default')
+    //   .light()
     $urlRouterProvider.otherwise('/');
     $stateProvider.state('Main', {
       url: "/",
