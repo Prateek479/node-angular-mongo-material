@@ -1,0 +1,39 @@
+.widget .panel, .widget.panel {
+  overflow: hidden;
+}
+
+.text-white {
+color: #fff;
+text-shadow: 1px 1px 2px #333;
+}
+
+.widget {
+  margin-bottom: 20px;
+border-right:0;
+border-left: 1px solid #ddd;
+box-shadow: 2px 2px 2px #ccc;
+}
+
+.row-table {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.row-table>[class*=col-] {
+  display: table-cell;
+  float: none;
+  table-layout: fixed;
+  vertical-align: middle;
+}  
+
+.thumb128 {
+  width: 128px!important;
+  height: 128px!important;
+}
+
+.list-group {
+  line-height: 1.3;
+}
