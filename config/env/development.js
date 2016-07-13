@@ -28,26 +28,26 @@ module.exports = {
   facebook: {
     clientID: 488623138014505,
     clientSecret: '07aed49ebe29c09df4db94a1fd205c4b',
-    callbackURL: 'http://localhost:3000/auth/facebook/callback'
+    callbackURL: 'http://139.59.9.132:3001/auth/facebook/callback'
   },
   linkedin: {
     clientID: '75k7vgzbxl72q1',
     clientSecret: 'NAlzGkLGpNAMF48o',
-    callbackURL: 'http://localhost:3000/auth/linkedin/callback'
+    callbackURL: 'http://139.59.9.132:3001/auth/linkedin/callback'
   },
   github: {
     clientID: '71a79af9c165cf24caf4',
     clientSecret: '3bb061b2a2966c02bea115ba01a1c8c2950c8850',
-    callbackURL: 'http://localhost:3000/auth/github/callback'
+    callbackURL: 'http://139.59.9.132:3001/auth/github/callback'
   },
   google: {
     clientID: 'process.env.GOOGLE_CLIENTID',
     clientSecret: 'process.env.GOOGLE_SECRET',
-    callbackURL: 'http://localhost:3000/auth/google/callback'
+    callbackURL: 'http://139.59.9.132:3001/auth/google/callback'
   },
   twitter: {
     clientID: 'process.env.TWITTER_CLIENTID',
     clientSecret: 'process.env.TWITTER_SECRET',
-    callbackURL: 'http://localhost:3000/auth/twitter/callback'
+    callbackURL: 'http://139.59.9.132:3001/auth/twitter/callback'
   }
 };
