@@ -49,6 +49,30 @@ angular.module('intranetMaterialApp', [
           return userUtility.checkLoggedin();
         }
       }
+    }).state('list group', {
+      url: '/groups',
+      templateUrl: 'views/groups/list.html',
+      resolve: {
+        loggedIn: function(userUtility) {
+          return userUtility.checkLoggedin();
+        }
+      }
+    }).state('Search', {
+      url: "/search",
+      templateUrl: 'views/search/view.html',
+      resolve: {
+        loggedIn: function(userUtility) {
+          return userUtility.checkLoggedin();
+        }
+      }
+    }).state('Events', {
+      url: "/events",
+      templateUrl: 'views/events/list.html',
+      resolve: {
+        loggedIn: function(userUtility) {
+          return userUtility.checkLoggedin();
+        }
+      }
     }).state('About', {
       url: "/about",
       templateUrl: 'views/about.html',
