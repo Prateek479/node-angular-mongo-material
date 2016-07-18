@@ -28,12 +28,12 @@ module.exports = {
   facebook: {
     clientID: 488623138014505,
     clientSecret: '07aed49ebe29c09df4db94a1fd205c4b',
-    callbackURL: 'http://139.59.9.132:3001/auth/facebook/callback'
+    callbackURL: 'http://localhost:3001/auth/facebook/callback'
   },
   linkedin: {
     clientID: '75k7vgzbxl72q1',
     clientSecret: 'NAlzGkLGpNAMF48o',
-    callbackURL: 'http://139.59.9.132:3001/auth/linkedin/callback'
+    callbackURL: 'http://localhost:3001/auth/linkedin/callback'
   },
   github: {
     clientID: '71a79af9c165cf24caf4',

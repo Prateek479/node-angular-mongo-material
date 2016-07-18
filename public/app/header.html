@@ -1,12 +1,16 @@
 <md-toolbar>
-       <div layout="row" layout-padding class="bg-dark-blue nav-dark" layout-align="space-between center">
-        <div>
+        <div class="md-toolbar-tools">
+          <div>
             <md-button href="/#" >Intranet</md-button>
             <md-button href="/#/groups">Groups</md-button>
             <md-button href="/#/events">Events</md-button>
             <md-button href="/#/jobs">Jobs</md-button>
             <md-button href="/#/companiest">Companies</md-button>
-            <md-menu>
+            
+<!--             <md-button class="md-fab md-mini" aria-label="Favorite">
+              <md-icon md-svg-icon="/images/user2.svg" aria-label="People Icon"></md-icon>
+            </md-button> -->
+            <!-- <md-menu>
                 <md-button md-menu-origin ng-click="$mdOpenMenu()">Help</md-button>
                 <md-menu-content width="2">
                     <md-menu-item>
@@ -16,13 +20,34 @@
                         <md-button>About</md-button>
                     </md-menu-item>
                 </md-menu-content>
-            </md-menu>
+            </md-menu> -->
         </div>
-        <div class="nav-buttons">
-            <md-button class="md-raised md-accent">My profile</md-button>
-            <md-button class="md-raised md-warn">Log Out</md-button>
-        </div>
-
+        <div layout="column" flex-xs="100" flex-sm="100" flex="33" layout-align="center center">
+        <md-menu md-position-mode="target-right target" >
+          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin md-svg-icon="/images/user2.svg"></md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button href='/#/users'>
+                  <div layout="row" flex>
+                    <p flex>Profile</p>
+                    <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                  </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button href='/logout'>
+                  <div layout="row" flex>
+                    <p flex>Logout</p>
+                    <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                  </div>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+    </div>    
 <!--   <md-nav-bar md-selected-nav-item="currentNavItem">
     <md-nav-item md-nav-click="goto('page1')" name="page1">Page One</md-nav-item>
     <md-nav-item md-nav-sref="app.page2" name="page2">Page Two</md-nav-item>
